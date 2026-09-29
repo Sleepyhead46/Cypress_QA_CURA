@@ -1,0 +1,144 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:12:57.628Z",
+    "end": "2026-09-28T06:13:04.087Z",
+    "duration": 6459,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2b84b2fa-df97-4b0f-99e8-96540ed32e21",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\03_auth_session.cy.js",
+      "file": "cypress\\e2e\\advanced\\03_auth_session.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7797b8b0-a6fb-4d35-a1fc-cb7072ce770f",
+          "title": "Advanced 03: Session Management with cy.session()",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test A: instantly enters appointment form without repeated login steps",
+              "fullTitle": "Advanced 03: Session Management with cy.session() Test A: instantly enters appointment form without repeated login steps",
+              "timedOut": null,
+              "duration": 4215,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/#appointment');\ncy.get('h2').should('have.text', 'Make Appointment');\ncy.get('#combo_facility').should('be.visible');",
+              "err": {},
+              "uuid": "1687bb85-4514-4825-a0e1-75774a55fdd8",
+              "parentUUID": "7797b8b0-a6fb-4d35-a1fc-cb7072ce770f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test B: accesses history page with active cached session",
+              "fullTitle": "Advanced 03: Session Management with cy.session() Test B: accesses history page with active cached session",
+              "timedOut": null,
+              "duration": 572,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/history.php#history');\ncy.get('h2').should('have.text', 'History');\n// Session state persists\ncy.get('#sidebar-wrapper').should('exist');",
+              "err": {},
+              "uuid": "239caaa3-d28c-49d6-8bec-55faa33892da",
+              "parentUUID": "7797b8b0-a6fb-4d35-a1fc-cb7072ce770f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test C: books appointment directly inside restored session",
+              "fullTitle": "Advanced 03: Session Management with cy.session() Test C: books appointment directly inside restored session",
+              "timedOut": null,
+              "duration": 1512,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/#appointment');\ncy.get('#combo_facility').select('Tokyo CURA Healthcare Center');\ncy.get('#txt_visit_date').type('18/11/2026');\ncy.get('h2').click();\ncy.get('#txt_comment').type('Session cached appointment booking');\ncy.get('#btn-book-appointment').click();\ncy.url().should('include', '/appointment.php#summary');\ncy.get('#facility').should('have.text', 'Tokyo CURA Healthcare Center');",
+              "err": {},
+              "uuid": "72afd08e-863f-4026-833c-263a88f1f18f",
+              "parentUUID": "7797b8b0-a6fb-4d35-a1fc-cb7072ce770f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1687bb85-4514-4825-a0e1-75774a55fdd8",
+            "239caaa3-d28c-49d6-8bec-55faa33892da",
+            "72afd08e-863f-4026-833c-263a88f1f18f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6299,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

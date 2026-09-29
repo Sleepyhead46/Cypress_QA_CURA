@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:15:45.794Z",
+    "end": "2026-09-28T06:15:53.185Z",
+    "duration": 7391,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8b38e54a-65dd-466d-89b6-051e4594ab7e",
+      "title": "",
+      "fullFile": "cypress\\e2e\\intermediate\\01_fixtures.cy.js",
+      "file": "cypress\\e2e\\intermediate\\01_fixtures.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4bcf84a9-a723-4345-a4ef-41d4597c4d98",
+          "title": "Intermediate 01: Fixture-Driven Automation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "authenticates using user fixture data",
+              "fullTitle": "Intermediate 01: Fixture-Driven Automation authenticates using user fixture data",
+              "timedOut": null,
+              "duration": 4658,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const {\n  validUser\n} = this.userData;\ncy.visit('/profile.php#login');\ncy.get('#txt-username').type(validUser.username);\ncy.get('#txt-password').type(validUser.password, {\n  log: false\n});\ncy.get('#btn-login').click();\n// Verify authenticated landing section\ncy.url().should('include', '#appointment');\ncy.get('h2').should('have.text', this.siteData.appointmentForm.heading);",
+              "err": {},
+              "uuid": "1a1e7fd7-f910-4485-a92b-8aa0f74100b1",
+              "parentUUID": "4bcf84a9-a723-4345-a4ef-41d4597c4d98",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "books an appointment using appointment fixture data",
+              "fullTitle": "Intermediate 01: Fixture-Driven Automation books an appointment using appointment fixture data",
+              "timedOut": null,
+              "duration": 2650,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const {\n  validUser\n} = this.userData;\nconst {\n  singleAppointment\n} = this.appointmentData;\n// Login\ncy.visit('/profile.php#login');\ncy.get('#txt-username').type(validUser.username);\ncy.get('#txt-password').type(validUser.password, {\n  log: false\n});\ncy.get('#btn-login').click();\n// Use fixture data for appointment fields\ncy.get('#combo_facility').select(singleAppointment.facility);\nif (singleAppointment.hospitalReadmission) {\n  cy.get('#chk_hospotal_readmission').check();\n}\nif (singleAppointment.program === 'Medicaid') {\n  cy.get('#radio_program_medicaid').check();\n}\ncy.get('#txt_visit_date').type(singleAppointment.visitDate);\ncy.get('h2').click(); // dismiss calendar\ncy.get('#txt_comment').type(singleAppointment.comment);\ncy.get('#btn-book-appointment').click();\n// Verify confirmation summary matches fixture data\ncy.url().should('include', '/appointment.php#summary');\ncy.get('#facility').should('have.text', singleAppointment.facility);\ncy.get('#hospital_readmission').should('have.text', singleAppointment.hospitalReadmission ? 'Yes' : 'No');\ncy.get('#program').should('have.text', singleAppointment.program);\ncy.get('#visit_date').should('have.text', singleAppointment.visitDate);\ncy.get('#comment').should('have.text', singleAppointment.comment);",
+              "err": {},
+              "uuid": "74aa5735-4234-4793-9e38-4d3ef31ca752",
+              "parentUUID": "4bcf84a9-a723-4345-a4ef-41d4597c4d98",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1a1e7fd7-f910-4485-a92b-8aa0f74100b1",
+            "74aa5735-4234-4793-9e38-4d3ef31ca752"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7308,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

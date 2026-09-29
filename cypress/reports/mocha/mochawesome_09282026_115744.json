@@ -1,0 +1,182 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:12:40.487Z",
+    "end": "2026-09-28T06:12:44.531Z",
+    "duration": 4044,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "845073e0-2c99-4ef5-81f1-c7cb7dfbe954",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\01_api_testing.cy.js",
+      "file": "cypress\\e2e\\advanced\\01_api_testing.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "68c7e5e2-e004-489b-858d-6f144c2826ef",
+          "title": "Advanced 01: API Testing with cy.request()",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "GET / - validates homepage HTTP 200 and headers",
+              "fullTitle": "Advanced 01: API Testing with cy.request() GET / - validates homepage HTTP 200 and headers",
+              "timedOut": null,
+              "duration": 1615,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${baseUrl}/`\n}).then(response => {\n  // 1. Status Code\n  expect(response.status).to.eq(200);\n  // 2. Response Headers\n  expect(response.headers).to.have.property('content-type');\n  expect(response.headers['content-type']).to.include('text/html');\n  // 3. Response Body Content\n  expect(response.body).to.include('CURA Healthcare Service');\n  expect(response.body).to.include('btn-make-appointment');\n});",
+              "err": {},
+              "uuid": "0aaa2291-258b-4cf6-a2a1-fb3ac16294d7",
+              "parentUUID": "68c7e5e2-e004-489b-858d-6f144c2826ef",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST /authenticate.php - validates authentication response, redirect, and session cookies",
+              "fullTitle": "Advanced 01: API Testing with cy.request() POST /authenticate.php - validates authentication response, redirect, and session cookies",
+              "timedOut": null,
+              "duration": 634,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${baseUrl}/authenticate.php`,\n  form: true,\n  // Application sends application/x-www-form-urlencoded\n  followRedirect: false,\n  // Inspect the direct 302 redirect response\n  body: {\n    username: 'John Doe',\n    password: 'ThisIsNotAPassword'\n  }\n}).then(response => {\n  // Verify redirect status code\n  expect(response.status).to.eq(302);\n  // Verify redirect destination header\n  expect(response.headers.location).to.include('#appointment');\n  // Verify session cookie set by server\n  expect(response.headers).to.have.property('set-cookie');\n  const cookies = response.headers['set-cookie'].join('; ');\n  expect(cookies).to.include('PHPSESSID');\n});",
+              "err": {},
+              "uuid": "af8c0851-3f26-4a41-b0b4-20505f62916a",
+              "parentUUID": "68c7e5e2-e004-489b-858d-6f144c2826ef",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST /authenticate.php - validates authentication rejection for invalid credentials",
+              "fullTitle": "Advanced 01: API Testing with cy.request() POST /authenticate.php - validates authentication rejection for invalid credentials",
+              "timedOut": null,
+              "duration": 754,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${baseUrl}/authenticate.php`,\n  form: true,\n  followRedirect: true,\n  body: {\n    username: 'FakeUser',\n    password: 'FakePassword'\n  }\n}).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body).to.include('Login failed');\n});",
+              "err": {},
+              "uuid": "4b1e2150-60e2-4883-815e-7f55d8582c0a",
+              "parentUUID": "68c7e5e2-e004-489b-858d-6f144c2826ef",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "GET /profile.php - verifies unauthenticated access redirects to login",
+              "fullTitle": "Advanced 01: API Testing with cy.request() GET /profile.php - verifies unauthenticated access redirects to login",
+              "timedOut": null,
+              "duration": 329,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${baseUrl}/profile.php`,\n  followRedirect: false\n}).then(response => {\n  // Protected endpoint redirects unauthenticated users\n  expect(response.status).to.be.oneOf([302, 200]);\n  if (response.status === 302) {\n    expect(response.headers.location).to.include('login');\n  }\n});",
+              "err": {},
+              "uuid": "64c87620-9c3e-423e-a46f-a6b0f00c7bc0",
+              "parentUUID": "68c7e5e2-e004-489b-858d-6f144c2826ef",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "GET /authenticate.php?logout - terminates session cleanly",
+              "fullTitle": "Advanced 01: API Testing with cy.request() GET /authenticate.php?logout - terminates session cleanly",
+              "timedOut": null,
+              "duration": 315,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${baseUrl}/authenticate.php?logout`,\n  followRedirect: false\n}).then(response => {\n  expect(response.status).to.eq(302);\n});",
+              "err": {},
+              "uuid": "982c033e-09d1-48b8-aa23-5b7fccdeea60",
+              "parentUUID": "68c7e5e2-e004-489b-858d-6f144c2826ef",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0aaa2291-258b-4cf6-a2a1-fb3ac16294d7",
+            "af8c0851-3f26-4a41-b0b4-20505f62916a",
+            "4b1e2150-60e2-4883-815e-7f55d8582c0a",
+            "64c87620-9c3e-423e-a46f-a6b0f00c7bc0",
+            "982c033e-09d1-48b8-aa23-5b7fccdeea60"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3647,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

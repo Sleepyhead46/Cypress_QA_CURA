@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-09-28T06:17:07.762Z",
+    "end": "2026-09-28T06:17:32.865Z",
+    "duration": 25103,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f03fa51f-06ab-4644-a548-f4a1bb056444",
+      "title": "",
+      "fullFile": "cypress\\e2e\\intermediate\\05_assertions_deep_dive.cy.js",
+      "file": "cypress\\e2e\\intermediate\\05_assertions_deep_dive.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7d2bedbf-8300-4dd4-a85b-c07d93c443bf",
+          "title": "Intermediate 05: Assertions Masterclass",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "demonstrates visibility, attribute, and text assertions",
+              "fullTitle": "Intermediate 05: Assertions Masterclass demonstrates visibility, attribute, and text assertions",
+              "timedOut": null,
+              "duration": 2922,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\n// 1. VISIBILITY: Asserts an element is rendered and not hidden by CSS display/visibility/opacity\ncy.get('#btn-make-appointment').should('be.visible');\n// Asserts an off-screen/closed element is not visible or not having active class\ncy.get('#sidebar-wrapper').should('not.have.class', 'active');\n// 2. TEXT:\n// 'have.text' matches the exact trimmed inner text\ncy.get('header#top h1').should('have.text', 'CURA Healthcare Service');\n// 'contain.text' matches substrings\ncy.get('footer').should('contain.text', 'Atlanta 550 Pharr Road');\n// 3. ATTRIBUTE: Asserts element attributes and values\ncy.get('#btn-make-appointment').should('have.attr', 'href').and('include', 'profile.php#login');\n// Asserts CSS classes\ncy.get('#menu-toggle').should('have.class', 'btn-dark');",
+              "err": {},
+              "uuid": "9349a5c6-a8ca-40f2-86ee-445ead3bbe0a",
+              "parentUUID": "7d2bedbf-8300-4dd4-a85b-c07d93c443bf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "demonstrates value, URL, and state assertions on forms",
+              "fullTitle": "Intermediate 05: Assertions Masterclass demonstrates value, URL, and state assertions on forms",
+              "timedOut": null,
+              "duration": 10949,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// 4. URL: Asserts the browser address bar contents\ncy.visit('/profile.php#login');\ncy.url().should('include', '/profile.php#login');\n// 5. VALUE: Asserts the .val() property of input/select controls\ncy.get('#txt-username').type('John Doe').should('have.value', 'John Doe');\ncy.get('#txt-password').type('ThisIsNotAPassword', {\n  log: false\n});\ncy.get('#btn-login').click();\n// 6. STATE: Checks element interactive state (checked, disabled, selected)\n// Checkbox unchecked state\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked');\n// Radio button state\ncy.get('#radio_program_medicare').should('be.checked');\ncy.get('#radio_program_medicaid').should('not.be.checked').check().should('be.checked');\n// Demo account username input on login page has readonly attribute/state:\ncy.visit('/profile.php#login');\ncy.get('.alert-info input[placeholder=\"Username\"]').should('have.attr', 'readonly');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `.alert-info input[placeholder=\"Username\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 8000ms: Expected to find element: `.alert-info input[placeholder=\"Username\"]`, but never found it.\n    at Context.eval (webpack://cypress-automation/./cypress/e2e/intermediate/05_assertions_deep_dive.cy.js:64:7)",
+                "diff": null
+              },
+              "uuid": "2998573e-3750-4e29-aefc-6fbe95bbc327",
+              "parentUUID": "7d2bedbf-8300-4dd4-a85b-c07d93c443bf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9349a5c6-a8ca-40f2-86ee-445ead3bbe0a"
+          ],
+          "failures": [
+            "2998573e-3750-4e29-aefc-6fbe95bbc327"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 13871,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

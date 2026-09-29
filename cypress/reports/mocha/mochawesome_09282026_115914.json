@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:14:11.660Z",
+    "end": "2026-09-28T06:14:14.604Z",
+    "duration": 2944,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "426a7960-0033-462d-90b9-8218825f3fe5",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\08_performance_checks.cy.js",
+      "file": "cypress\\e2e\\advanced\\08_performance_checks.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d2ff13cf-ca59-4713-98d4-97725af6806c",
+          "title": "Advanced 08: Client Performance & SLA Timing Checks",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "asserts page load time completes within SLA budget",
+              "fullTitle": "Advanced 08: Client Performance & SLA Timing Checks asserts page load time completes within SLA budget",
+              "timedOut": null,
+              "duration": 2415,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const startTime = Date.now();\ncy.visit('/');\n// Ensure critical interactive elements are visible\ncy.get('#btn-make-appointment').should('be.visible').then(() => {\n  const totalDuration = Date.now() - startTime;\n  cy.log(`Homepage First Meaningful Paint Duration: ${totalDuration}ms`);\n  // SLA threshold: Under 5000ms over public internet\n  expect(totalDuration).to.be.lessThan(5000);\n});\n// Inspect Navigation Timing API via window\ncy.window().then(win => {\n  const [navEntry] = win.performance.getEntriesByType('navigation');\n  if (navEntry) {\n    cy.log(`DOM Interactive: ${Math.round(navEntry.domInteractive)}ms`);\n    cy.log(`DOM Complete: ${Math.round(navEntry.domComplete)}ms`);\n    expect(navEntry.domInteractive).to.be.greaterThan(0);\n  }\n});",
+              "err": {},
+              "uuid": "69fa4d2d-ab84-4493-adfd-8d1c33ef9e61",
+              "parentUUID": "d2ff13cf-ca59-4713-98d4-97725af6806c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "measures backend API roundtrip latency within 2500ms SLA",
+              "fullTitle": "Advanced 08: Client Performance & SLA Timing Checks measures backend API roundtrip latency within 2500ms SLA",
+              "timedOut": null,
+              "duration": 366,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const apiStart = Date.now();\ncy.request({\n  method: 'POST',\n  url: `${Cypress.config('baseUrl')}/authenticate.php`,\n  form: true,\n  followRedirect: false,\n  body: {\n    username: 'John Doe',\n    password: 'ThisIsNotAPassword'\n  }\n}).then(res => {\n  const duration = Date.now() - apiStart;\n  cy.log(`Auth API Latency: ${duration}ms`);\n  expect(res.status).to.eq(302);\n  expect(duration).to.be.lessThan(2500);\n});",
+              "err": {},
+              "uuid": "980f6029-abd8-4898-a5c6-122e2fb2528b",
+              "parentUUID": "d2ff13cf-ca59-4713-98d4-97725af6806c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "69fa4d2d-ab84-4493-adfd-8d1c33ef9e61",
+            "980f6029-abd8-4898-a5c6-122e2fb2528b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2781,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

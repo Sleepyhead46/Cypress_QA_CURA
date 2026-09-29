@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:17:40.475Z",
+    "end": "2026-09-28T06:17:48.074Z",
+    "duration": 7599,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9d11be76-135d-4bc5-b014-6c98ac79f589",
+      "title": "",
+      "fullFile": "cypress\\e2e\\intermediate\\07_file_handling.cy.js",
+      "file": "cypress\\e2e\\intermediate\\07_file_handling.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ad3b00b3-fac8-492d-bedf-f81aaf9f3cbe",
+          "title": "Intermediate 07: File Handling Automation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "uploads a file using modern Cypress .selectFile() API",
+              "fullTitle": "Intermediate 07: File Handling Automation uploads a file using modern Cypress .selectFile() API",
+              "timedOut": null,
+              "duration": 3369,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(uploadUrl);\n// Verify upload container is visible\ncy.get('#file-upload').should('be.visible');\n// Use .selectFile() to attach fixture file\ncy.get('#file-upload').selectFile('cypress/fixtures/sample_report.txt');\n// Submit upload form\ncy.get('#file-submit').click();\n// Verify upload confirmation\ncy.get('h3').should('have.text', 'File Uploaded!');\ncy.get('#uploaded-files').should('contain.text', 'sample_report.txt');",
+              "err": {},
+              "uuid": "e0097937-257c-40c9-bce7-dcf5a428d446",
+              "parentUUID": "ad3b00b3-fac8-492d-bedf-f81aaf9f3cbe",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "triggers and verifies file download link accessibility",
+              "fullTitle": "Intermediate 07: File Handling Automation triggers and verifies file download link accessibility",
+              "timedOut": null,
+              "duration": 458,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(downloadUrl);\n// Verify file download list contains at least one downloadable link\ncy.get('.example a').should('have.length.greaterThan', 0);\n// Verify the first available download link has a valid href attribute\ncy.get('.example a').first().should('have.attr', 'href').and('match', /download\\/.+/);",
+              "err": {},
+              "uuid": "ff060fd1-4bc4-4b55-b8ec-4430e9566604",
+              "parentUUID": "ad3b00b3-fac8-492d-bedf-f81aaf9f3cbe",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e0097937-257c-40c9-bce7-dcf5a428d446",
+            "ff060fd1-4bc4-4b55-b8ec-4430e9566604"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3827,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

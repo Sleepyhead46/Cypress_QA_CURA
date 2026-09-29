@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:15:30.383Z",
+    "end": "2026-09-28T06:15:36.539Z",
+    "duration": 6156,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "149e2acd-90ab-4d8d-b7c4-152a33d34b03",
+      "title": "",
+      "fullFile": "cypress\\e2e\\basic\\06_checkbox_radio.cy.js",
+      "file": "cypress\\e2e\\basic\\06_checkbox_radio.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "71ce99be-f25f-48d9-a111-4953a2bf3ae4",
+          "title": "Basic 06: Checkbox and Radio Button Automation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "checks and unchecks hospital readmission checkbox",
+              "fullTitle": "Basic 06: Checkbox and Radio Button Automation checks and unchecks hospital readmission checkbox",
+              "timedOut": null,
+              "duration": 4516,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const checkbox = cy.get('#chk_hospotal_readmission');\n// Initially unchecked\ncheckbox.should('not.be.checked');\n// Check the box\ncheckbox.check();\ncheckbox.should('be.checked');\n// Uncheck the box\ncheckbox.uncheck();\ncheckbox.should('not.be.checked');",
+              "err": {},
+              "uuid": "9fc094a7-5b1f-4213-bd16-d212d69a0cd1",
+              "parentUUID": "71ce99be-f25f-48d9-a111-4953a2bf3ae4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "switches between healthcare program radio buttons and verifies single active selection",
+              "fullTitle": "Basic 06: Checkbox and Radio Button Automation switches between healthcare program radio buttons and verifies single active selection",
+              "timedOut": null,
+              "duration": 1575,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Medicare is selected by default\ncy.get('#radio_program_medicare').should('be.checked');\ncy.get('#radio_program_medicaid').should('not.be.checked');\ncy.get('#radio_program_none').should('not.be.checked');\n// Check Medicaid\ncy.get('#radio_program_medicaid').check().should('be.checked');\ncy.get('#radio_program_medicare').should('not.be.checked');\ncy.get('#radio_program_none').should('not.be.checked');\n// Check None\ncy.get('#radio_program_none').check().should('be.checked');\ncy.get('#radio_program_medicaid').should('not.be.checked');",
+              "err": {},
+              "uuid": "736df4ed-fabd-4be9-8fe8-5beca5dddf09",
+              "parentUUID": "71ce99be-f25f-48d9-a111-4953a2bf3ae4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9fc094a7-5b1f-4213-bd16-d212d69a0cd1",
+            "736df4ed-fabd-4be9-8fe8-5beca5dddf09"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6091,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

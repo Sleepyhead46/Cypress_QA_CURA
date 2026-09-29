@@ -1,0 +1,51 @@
+{
+  "name": "cypress-automation",
+  "version": "1.0.0",
+  "description": "Production-grade Cypress End-to-End Automation Framework featuring CURA Healthcare demo",
+  "main": "index.js",
+  "scripts": {
+    "clean:reports": "node -e \"const fs = require('fs'); ['cypress/reports', 'cypress/screenshots', 'cypress/videos'].forEach(dir => fs.rmSync(dir, { recursive: true, force: true }));\"",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:edge": "cypress run --browser edge",
+    "cy:run:electron": "cypress run --browser electron",
+    "cy:run:headless": "cypress run --headless",
+    "test:basic": "cypress run --spec \"cypress/e2e/basic/**/*.cy.js\"",
+    "test:intermediate": "cypress run --spec \"cypress/e2e/intermediate/**/*.cy.js\"",
+    "test:advanced": "cypress run --spec \"cypress/e2e/advanced/**/*.cy.js\"",
+    "test:smoke": "cypress run --spec \"cypress/e2e/basic/01_visit_and_headings.cy.js,cypress/e2e/intermediate/03_page_objects.cy.js\"",
+    "test:regression": "cypress run --spec \"cypress/e2e/**/*.cy.js\"",
+    "test:api": "cypress run --spec \"cypress/e2e/advanced/01_api_testing.cy.js\"",
+    "test:ui": "cypress run --spec \"cypress/e2e/basic/**/*.cy.js,cypress/e2e/intermediate/**/*.cy.js\"",
+    "pretest": "npm run clean:reports",
+    "test": "cypress run || true",
+    "report:merge": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/merged-report.json",
+    "report:generate": "marge cypress/reports/merged-report.json -f report -o cypress/reports/html --charts true --showPassed true --showFailed true",
+    "report": "npm run report:merge && npm run report:generate",
+    "test:full": "npm run clean:reports && npm run test && npm run report"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "automation",
+    "testing",
+    "cura-healthcare",
+    "page-object-model",
+    "mochawesome",
+    "accessibility",
+    "docker",
+    "ci-cd"
+  ],
+  "author": "Antigravity Testing Team",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "axe-core": "^4.13.0",
+    "cypress": "^16.1.0",
+    "cypress-axe": "^1.7.0",
+    "mochawesome": "^8.1.1",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2"
+  }
+}

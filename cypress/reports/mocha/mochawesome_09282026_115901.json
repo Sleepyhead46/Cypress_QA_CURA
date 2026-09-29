@@ -1,0 +1,240 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:13:49.839Z",
+    "end": "2026-09-28T06:14:01.904Z",
+    "duration": 12065,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "dd9c3e8f-222f-49f8-98f7-5b59c73e00fc",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\06_negative_and_edge_cases.cy.js",
+      "file": "cypress\\e2e\\advanced\\06_negative_and_edge_cases.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6967a17f-21e0-4580-b366-c2559ddaf218",
+          "title": "Advanced 06: Negative Testing and Boundary Edge Cases",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "43e8d1d6-08bf-4848-b92c-c3a7679e56e9",
+              "title": "Authentication Failure Modes",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "rejects empty username and empty password",
+                  "fullTitle": "Advanced 06: Negative Testing and Boundary Edge Cases Authentication Failure Modes rejects empty username and empty password",
+                  "timedOut": null,
+                  "duration": 3313,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('#btn-login').click();\ncy.get('.text-danger').should('be.visible').and('contain.text', 'Login failed!');",
+                  "err": {},
+                  "uuid": "6ead1d36-96d0-41f1-8196-236f099bd5fd",
+                  "parentUUID": "43e8d1d6-08bf-4848-b92c-c3a7679e56e9",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "rejects SQL injection attempt and sanitizes input",
+                  "fullTitle": "Advanced 06: Negative Testing and Boundary Edge Cases Authentication Failure Modes rejects SQL injection attempt and sanitizes input",
+                  "timedOut": null,
+                  "duration": 1414,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.get('#txt-username').type(\"' OR '1'='1\");\ncy.get('#txt-password').type(\"' OR '1'='1\", {\n  log: false\n});\ncy.get('#btn-login').click();\ncy.get('.text-danger').should('be.visible').and('contain.text', 'Login failed!');",
+                  "err": {},
+                  "uuid": "7f215112-5fc2-45ce-94f5-25798c4de1cf",
+                  "parentUUID": "43e8d1d6-08bf-4848-b92c-c3a7679e56e9",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "safely handles excessively long input strings without UI crash",
+                  "fullTitle": "Advanced 06: Negative Testing and Boundary Edge Cases Authentication Failure Modes safely handles excessively long input strings without UI crash",
+                  "timedOut": null,
+                  "duration": 1915,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const veryLongString = 'A'.repeat(500);\ncy.get('#txt-username').type(veryLongString);\ncy.get('#txt-password').type('SomePassword', {\n  log: false\n});\ncy.get('#btn-login').click();\ncy.get('.text-danger').should('be.visible');",
+                  "err": {},
+                  "uuid": "270cb8c3-74b5-453c-84d1-e84ede76c956",
+                  "parentUUID": "43e8d1d6-08bf-4848-b92c-c3a7679e56e9",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "prevents direct unauthorized URL access to protected pages",
+                  "fullTitle": "Advanced 06: Negative Testing and Boundary Edge Cases Authentication Failure Modes prevents direct unauthorized URL access to protected pages",
+                  "timedOut": null,
+                  "duration": 1103,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// Clear all cookies to simulate unauthenticated visitor\ncy.clearCookies();\ncy.visit('/history.php#history');\n// The application prevents unauthorized access by showing empty history or redirecting\ncy.get('body').should('be.visible');",
+                  "err": {},
+                  "uuid": "63e71b5e-1d4c-46f1-90fa-b3a61b6abe82",
+                  "parentUUID": "43e8d1d6-08bf-4848-b92c-c3a7679e56e9",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "6ead1d36-96d0-41f1-8196-236f099bd5fd",
+                "7f215112-5fc2-45ce-94f5-25798c4de1cf",
+                "270cb8c3-74b5-453c-84d1-e84ede76c956",
+                "63e71b5e-1d4c-46f1-90fa-b3a61b6abe82"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 7745,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "5cccf48d-ddc8-4ae5-b6af-6afa24f345f5",
+              "title": "Form Boundary & HTML5 Validation",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "enforces required field constraint when Visit Date is empty",
+                  "fullTitle": "Advanced 06: Negative Testing and Boundary Edge Cases Form Boundary & HTML5 Validation enforces required field constraint when Visit Date is empty",
+                  "timedOut": null,
+                  "duration": 1698,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// Leave required visit date empty\ncy.get('#txt_visit_date').should('have.attr', 'required');\ncy.get('#btn-book-appointment').click();\n// Verify HTML5 validity check fails\ncy.get('#txt_visit_date').then($input => {\n  expect($input[0].checkValidity()).to.be.false;\n});\n// Still on appointment page, did not submit\ncy.url().should('not.include', '/appointment.php#summary');",
+                  "err": {},
+                  "uuid": "f2966aca-8de4-4ba1-819a-83b5b93ca8d7",
+                  "parentUUID": "5cccf48d-ddc8-4ae5-b6af-6afa24f345f5",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "handles special characters and multiline text in comments textarea",
+                  "fullTitle": "Advanced 06: Negative Testing and Boundary Edge Cases Form Boundary & HTML5 Validation handles special characters and multiline text in comments textarea",
+                  "timedOut": null,
+                  "duration": 2427,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const complexComment = 'Special chars: !@#$%^&*()_+{}|:\"<>?~`\\nLine 2 with accents: é, à, ç, ü\\nLine 3: 1234567890';\ncy.get('#txt_visit_date').type('28/11/2026');\ncy.get('h2').click();\ncy.get('#txt_comment').type(complexComment);\ncy.get('#btn-book-appointment').click();\ncy.url().should('include', '/appointment.php#summary');\ncy.get('#comment').should('contain.text', 'Special chars:');",
+                  "err": {},
+                  "uuid": "3a629d1f-1ba8-4d8f-a021-5cb31afd3139",
+                  "parentUUID": "5cccf48d-ddc8-4ae5-b6af-6afa24f345f5",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f2966aca-8de4-4ba1-819a-83b5b93ca8d7",
+                "3a629d1f-1ba8-4d8f-a021-5cb31afd3139"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 4125,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

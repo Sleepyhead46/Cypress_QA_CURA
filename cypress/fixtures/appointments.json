@@ -1,0 +1,32 @@
+{
+  "singleAppointment": {
+    "facility": "Tokyo CURA Healthcare Center",
+    "hospitalReadmission": true,
+    "program": "Medicaid",
+    "visitDate": "15/10/2026",
+    "comment": "Annual full-body routine checkup and blood work."
+  },
+  "appointmentsList": [
+    {
+      "facility": "Tokyo CURA Healthcare Center",
+      "hospitalReadmission": true,
+      "program": "Medicare",
+      "visitDate": "20/10/2026",
+      "comment": "Follow-up consultation with primary care physician."
+    },
+    {
+      "facility": "Hongkong CURA Healthcare Center",
+      "hospitalReadmission": false,
+      "program": "Medicaid",
+      "visitDate": "25/11/2026",
+      "comment": "Cardiology screening consultation."
+    },
+    {
+      "facility": "Seoul CURA Healthcare Center",
+      "hospitalReadmission": true,
+      "program": "None",
+      "visitDate": "05/12/2026",
+      "comment": "Orthopedic physical therapy appointment."
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:14:16.545Z",
+    "end": "2026-09-28T06:14:23.204Z",
+    "duration": 6659,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "de9ca703-eddb-4dcd-af0d-5486af10b213",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\09_error_handling_debugging.cy.js",
+      "file": "cypress\\e2e\\advanced\\09_error_handling_debugging.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2bce7749-150e-4736-9b76-ce3d6ea34a4b",
+          "title": "Advanced 09: Diagnostics, Debugging, and Retry Mechanism",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "demonstrates built-in automatic retries instead of arbitrary sleeps",
+              "fullTitle": "Advanced 09: Diagnostics, Debugging, and Retry Mechanism demonstrates built-in automatic retries instead of arbitrary sleeps",
+              "timedOut": null,
+              "duration": 4806,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/profile.php#login');\n// Logging diagnostic information in the Cypress Command Log\ncy.log('Step 1: Entering credentials');\ncy.get('#txt-username').type('John Doe');\ncy.get('#txt-password').type('ThisIsNotAPassword', {\n  log: false\n});\ncy.get('#btn-login').click();\ncy.log('Step 2: Awaiting page transition with automatic retry');\n// Cypress retries this assertion continuously until it passes or times out\ncy.url().should('include', '#appointment');\ncy.get('h2').should('have.text', 'Make Appointment');",
+              "err": {},
+              "uuid": "0b76d6da-25bd-4f01-bb44-fa294bd8e859",
+              "parentUUID": "2bce7749-150e-4736-9b76-ce3d6ea34a4b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "demonstrates deep element inspection using .then() and explicit logging",
+              "fullTitle": "Advanced 09: Diagnostics, Debugging, and Retry Mechanism demonstrates deep element inspection using .then() and explicit logging",
+              "timedOut": null,
+              "duration": 365,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/profile.php#login');\n// Use .then() to yield native DOM element for low-level property diagnostics\ncy.get('#btn-login').then($button => {\n  const buttonText = $button.text().trim();\n  const tagName = $button.prop('tagName');\n  const isEnabled = !$button.prop('disabled');\n  cy.log(`Diagnostic Info: Tag=<${tagName}>, Text=\"${buttonText}\", Enabled=${isEnabled}`);\n  expect(buttonText).to.eq('Login');\n  expect(isEnabled).to.be.true;\n});",
+              "err": {},
+              "uuid": "f2d3e4e0-b026-4131-9c8f-ead0c0c07c4d",
+              "parentUUID": "2bce7749-150e-4736-9b76-ce3d6ea34a4b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "captures custom on-demand diagnostic screenshot during critical flows",
+              "fullTitle": "Advanced 09: Diagnostics, Debugging, and Retry Mechanism captures custom on-demand diagnostic screenshot during critical flows",
+              "timedOut": null,
+              "duration": 1381,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\ncy.get('#btn-make-appointment').should('be.visible');\n// Take an on-demand debug screenshot with timestamp\ncy.screenshot(`diagnostic-snapshot-${Date.now()}`);",
+              "err": {},
+              "uuid": "ddcc4eae-5494-4648-92e5-998a306ee9b5",
+              "parentUUID": "2bce7749-150e-4736-9b76-ce3d6ea34a4b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0b76d6da-25bd-4f01-bb44-fa294bd8e859",
+            "f2d3e4e0-b026-4131-9c8f-ead0c0c07c4d",
+            "ddcc4eae-5494-4648-92e5-998a306ee9b5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6552,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

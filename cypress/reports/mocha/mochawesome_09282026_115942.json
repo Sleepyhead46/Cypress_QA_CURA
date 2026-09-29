@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:14:36.002Z",
+    "end": "2026-09-28T06:14:42.526Z",
+    "duration": 6524,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "89449cca-fc68-46e8-b6ca-f402e2845ac9",
+      "title": "",
+      "fullFile": "cypress\\e2e\\basic\\02_element_validation.cy.js",
+      "file": "cypress\\e2e\\basic\\02_element_validation.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ff6726a7-4bf2-4668-9a04-a6799a6a01cd",
+          "title": "Basic 02: Element Validation with Chained Assertions",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "validates buttons, links, and footer texts on homepage",
+              "fullTitle": "Basic 02: Element Validation with Chained Assertions validates buttons, links, and footer texts on homepage",
+              "timedOut": null,
+              "duration": 3758,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\n// 1. Button / Link Validation using cy.get() and cy.contains()\ncy.get('#btn-make-appointment').should('be.visible').and('have.attr', 'href', './profile.php#login').and('contain.text', 'Make Appointment');\n// 2. Navigation toggle button\ncy.get('#menu-toggle').should('be.visible').and('have.class', 'btn-dark');\n// 3. Text content in footer\ncy.contains('strong', 'CURA Healthcare Service').should('be.visible');\ncy.contains('Atlanta 550 Pharr Road NE Suite 525').should('be.visible');\n// 4. Social links have expected icons\ncy.get('ul.list-inline li a').should('have.length', 3).and('be.visible');",
+              "err": {},
+              "uuid": "33378126-bfa2-41e2-927c-3fdc6f844c08",
+              "parentUUID": "ff6726a7-4bf2-4668-9a04-a6799a6a01cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "validates inputs, dropdowns, checkboxes, and radio buttons on appointment form",
+              "fullTitle": "Basic 02: Element Validation with Chained Assertions validates inputs, dropdowns, checkboxes, and radio buttons on appointment form",
+              "timedOut": null,
+              "duration": 2574,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login to reach appointment form elements\ncy.visit('/profile.php#login');\n// 5. Input Validation on login page\ncy.get('#txt-username').should('be.visible').and('have.attr', 'placeholder', 'Username');\ncy.get('#txt-password').should('be.visible').and('have.attr', 'type', 'password');\ncy.get('#btn-login').should('be.visible').and('have.text', 'Login').click();\n// Fill valid credentials to unlock appointment form\ncy.get('#txt-username').type('John Doe');\ncy.get('#txt-password').type('ThisIsNotAPassword');\ncy.get('#btn-login').click();\n// 6. Dropdown Validation\ncy.get('#combo_facility').should('be.visible').and('have.prop', 'tagName', 'SELECT').find('option').should('have.length', 3);\n// 7. Checkbox Validation\ncy.get('#chk_hospotal_readmission').should('exist').and('not.be.checked').and('have.attr', 'value', 'Yes');\n// 8. Radio Buttons Validation\ncy.get('input[name=\"programs\"]').should('have.length', 3);\ncy.get('#radio_program_medicare').should('be.checked');\ncy.get('#radio_program_medicaid').should('not.be.checked');\ncy.get('#radio_program_none').should('not.be.checked');\n// 9. Date input and comment textarea validation\ncy.get('#txt_visit_date').should('be.visible').and('have.attr', 'required');\ncy.get('#txt_comment').should('be.visible').and('have.attr', 'placeholder', 'Comment');",
+              "err": {},
+              "uuid": "7fad3898-6dcd-430a-a8c7-77b74e59925d",
+              "parentUUID": "ff6726a7-4bf2-4668-9a04-a6799a6a01cd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "33378126-bfa2-41e2-927c-3fdc6f844c08",
+            "7fad3898-6dcd-430a-a8c7-77b74e59925d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6332,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

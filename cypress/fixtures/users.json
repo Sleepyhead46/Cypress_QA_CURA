@@ -1,0 +1,48 @@
+{
+  "validUser": {
+    "username": "John Doe",
+    "password": "ThisIsNotAPassword",
+    "role": "Standard Patient"
+  },
+  "invalidUser": {
+    "username": "UnknownUser",
+    "password": "WrongPassword123",
+    "errorMessage": "Login failed! Please ensure the username and password are valid."
+  },
+  "emptyUsername": {
+    "username": "",
+    "password": "ThisIsNotAPassword",
+    "errorMessage": "Login failed! Please ensure the username and password are valid."
+  },
+  "emptyPassword": {
+    "username": "John Doe",
+    "password": "",
+    "errorMessage": "Login failed! Please ensure the username and password are valid."
+  },
+  "dataDrivenUsers": [
+    {
+      "description": "Invalid Username and Valid Password",
+      "username": "JaneDoe",
+      "password": "ThisIsNotAPassword",
+      "shouldSucceed": false
+    },
+    {
+      "description": "Valid Username and Invalid Password",
+      "username": "John Doe",
+      "password": "InvalidPassword!",
+      "shouldSucceed": false
+    },
+    {
+      "description": "SQL Injection Pattern Test",
+      "username": "' OR '1'='1",
+      "password": "' OR '1'='1",
+      "shouldSucceed": false
+    },
+    {
+      "description": "Valid Demo User Credentials",
+      "username": "John Doe",
+      "password": "ThisIsNotAPassword",
+      "shouldSucceed": true
+    }
+  ]
+}

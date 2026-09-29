@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:13:34.742Z",
+    "end": "2026-09-28T06:13:47.519Z",
+    "duration": 12777,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "038189cc-a854-49e5-bf89-23e967bda4c5",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\05_tables_and_panels.cy.js",
+      "file": "cypress\\e2e\\advanced\\05_tables_and_panels.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a5942296-cf3b-441b-b942-45dcdf9c038f",
+          "title": "Advanced 05: Tables and Structured Record Automation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "validates empty state prior to creating appointment records",
+              "fullTitle": "Advanced 05: Tables and Structured Record Automation validates empty state prior to creating appointment records",
+              "timedOut": null,
+              "duration": 8050,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/history.php#history');\ncy.get('h2').should('have.text', 'History');\ncy.contains('p', 'No appointment.').should('be.visible');",
+              "err": {},
+              "uuid": "22fe7fef-3692-436e-aed2-bb34bb396440",
+              "parentUUID": "a5942296-cf3b-441b-b942-45dcdf9c038f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "books multiple appointments and validates structured records in history",
+              "fullTitle": "Advanced 05: Tables and Structured Record Automation books multiple appointments and validates structured records in history",
+              "timedOut": null,
+              "duration": 4627,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const record1 = {\n  facility: 'Tokyo CURA Healthcare Center',\n  hospitalReadmission: true,\n  program: 'Medicare',\n  visitDate: '10/11/2026',\n  comment: 'First historical appointment record'\n};\nconst record2 = {\n  facility: 'Hongkong CURA Healthcare Center',\n  hospitalReadmission: false,\n  program: 'Medicaid',\n  visitDate: '20/12/2026',\n  comment: 'Second historical appointment record'\n};\n// Book Record 1\ncy.bookAppointment(record1);\ncy.url().should('include', '/appointment.php#summary');\n// Return to form and book Record 2\ncy.visit('/#appointment');\ncy.bookAppointment(record2);\ncy.url().should('include', '/appointment.php#summary');\n// Navigate to History page\ncy.visit('/history.php#history');\n// 1. Record Count: Assert multiple panels exist\ncy.get('.panel.panel-info').should('have.length', 2);\n// 2. Validate Row/Panel 1 values\ncy.get('.panel.panel-info').eq(0).within(() => {\n  cy.get('.panel-heading').should('contain.text', record1.visitDate);\n  cy.get('#facility').should('have.text', record1.facility);\n  cy.get('#hospital_readmission').should('have.text', 'Yes');\n  cy.get('#program').should('have.text', record1.program);\n  cy.get('#comment').should('have.text', record1.comment);\n});\n// 3. Validate Row/Panel 2 values\ncy.get('.panel.panel-info').eq(1).within(() => {\n  cy.get('.panel-heading').should('contain.text', record2.visitDate);\n  cy.get('#facility').should('have.text', record2.facility);\n  cy.get('#hospital_readmission').should('have.text', 'No');\n  cy.get('#program').should('have.text', record2.program);\n  cy.get('#comment').should('have.text', record2.comment);\n});",
+              "err": {},
+              "uuid": "1e570710-5986-473d-913c-8bf83da9509e",
+              "parentUUID": "a5942296-cf3b-441b-b942-45dcdf9c038f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "22fe7fef-3692-436e-aed2-bb34bb396440",
+            "1e570710-5986-473d-913c-8bf83da9509e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 12677,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

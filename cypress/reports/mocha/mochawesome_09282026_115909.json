@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:14:04.107Z",
+    "end": "2026-09-28T06:14:09.913Z",
+    "duration": 5806,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a77a2e08-9963-4be1-a379-41657333cdf1",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\07_accessibility.cy.js",
+      "file": "cypress\\e2e\\advanced\\07_accessibility.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4c26346a-2a71-4036-a9f7-2f5f649d473f",
+          "title": "Advanced 07: Automated Accessibility Testing with cypress-axe",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "scans Homepage for WCAG accessibility violations",
+              "fullTitle": "Advanced 07: Automated Accessibility Testing with cypress-axe scans Homepage for WCAG accessibility violations",
+              "timedOut": null,
+              "duration": 3508,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\n// 1. Inject the axe-core testing engine into the loaded page\ncy.injectAxe();\n// 2. Scan the page and report violations\ncy.checkA11y(null, {\n  runOnly: {\n    type: 'tag',\n    values: ['wcag2a', 'wcag2aa']\n  }\n}, violations => {\n  cy.log(`A11y Violations detected: ${violations.length}`);\n  violations.forEach(v => {\n    cy.log(`[${v.impact.toUpperCase()}] ${v.id}: ${v.help}`);\n  });\n}, true // skipFailures=true allows observing full audit logs on legacy demo websites\n);\n// 3. Verify semantic heading hierarchy exists\ncy.get('h1').should('have.length.at.least', 1);\ncy.get('h3').should('have.length.at.least', 1);",
+              "err": {},
+              "uuid": "c28a37a5-3fe0-43e5-b888-fa37bf9816f8",
+              "parentUUID": "4c26346a-2a71-4036-a9f7-2f5f649d473f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "scans Login Form for accessible input labels and controls",
+              "fullTitle": "Advanced 07: Automated Accessibility Testing with cypress-axe scans Login Form for accessible input labels and controls",
+              "timedOut": null,
+              "duration": 2137,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/profile.php#login');\ncy.injectAxe();\n// Scan specifically the login section form\ncy.checkA11y('#login form', null, violations => {\n  cy.log(`Form Violations count: ${violations.length}`);\n}, true);\n// Verify explicit label associations\ncy.get('label[for=\"txt-username\"]').should('be.visible').and('have.text', 'Username');\ncy.get('label[for=\"txt-password\"]').should('be.visible').and('have.text', 'Password');\ncy.get('#btn-login').should('be.visible').and('have.text', 'Login');",
+              "err": {},
+              "uuid": "d6b7a09e-cd22-4497-b537-211ed34e6154",
+              "parentUUID": "4c26346a-2a71-4036-a9f7-2f5f649d473f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c28a37a5-3fe0-43e5-b888-fa37bf9816f8",
+            "d6b7a09e-cd22-4497-b537-211ed34e6154"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5645,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

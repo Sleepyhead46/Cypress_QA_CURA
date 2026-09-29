@@ -1,0 +1,163 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:07:14.431Z",
+    "end": "2026-09-28T06:07:22.225Z",
+    "duration": 7794,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2eff72f4-909e-4fa9-9d0e-7cb22ae01dd4",
+      "title": "",
+      "fullFile": "cypress\\e2e\\basic\\01_visit_and_headings.cy.js",
+      "file": "cypress\\e2e\\basic\\01_visit_and_headings.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3b697caf-10f3-44df-9d70-b0f427ab24e3",
+          "title": "Basic 01: Open Website and Verify Header Elements",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should successfully load the website and display correct URL",
+              "fullTitle": "Basic 01: Open Website and Verify Header Elements should successfully load the website and display correct URL",
+              "timedOut": null,
+              "duration": 5299,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Verify the URL matches the expected base domain\ncy.url().should('eq', `${Cypress.config('baseUrl')}/`);",
+              "err": {},
+              "uuid": "36b8a2c6-b315-4cc0-b63d-5c264f8ca66d",
+              "parentUUID": "3b697caf-10f3-44df-9d70-b0f427ab24e3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should display the correct page title in browser tab",
+              "fullTitle": "Basic 01: Open Website and Verify Header Elements should display the correct page title in browser tab",
+              "timedOut": null,
+              "duration": 429,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Verify document title\ncy.title().should('eq', 'CURA Healthcare Service');",
+              "err": {},
+              "uuid": "66c00ca9-c51d-4342-a777-0efa891ae54d",
+              "parentUUID": "3b697caf-10f3-44df-9d70-b0f427ab24e3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should display the main header and sub-heading texts",
+              "fullTitle": "Basic 01: Open Website and Verify Header Elements should display the main header and sub-heading texts",
+              "timedOut": null,
+              "duration": 449,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Verify primary hero heading\ncy.get('header#top h1').should('be.visible').and('have.text', 'CURA Healthcare Service');\n// Verify sub-heading text\ncy.get('header#top h3').should('be.visible').and('have.text', 'We Care About Your Health');",
+              "err": {},
+              "uuid": "44fe7af0-28e5-4a34-94bc-9260b6d8ca0e",
+              "parentUUID": "3b697caf-10f3-44df-9d70-b0f427ab24e3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should take a full page screenshot for visual validation",
+              "fullTitle": "Basic 01: Open Website and Verify Header Elements should take a full page screenshot for visual validation",
+              "timedOut": null,
+              "duration": 1457,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Capture screenshot manually and save to screenshots directory\ncy.screenshot('homepage-initial-load');",
+              "err": {},
+              "uuid": "8f40d206-2e1a-474a-9a57-69942dd7ac48",
+              "parentUUID": "3b697caf-10f3-44df-9d70-b0f427ab24e3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "36b8a2c6-b315-4cc0-b63d-5c264f8ca66d",
+            "66c00ca9-c51d-4342-a777-0efa891ae54d",
+            "44fe7af0-28e5-4a34-94bc-9260b6d8ca0e",
+            "8f40d206-2e1a-474a-9a57-69942dd7ac48"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7634,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

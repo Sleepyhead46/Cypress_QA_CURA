@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:15:22.943Z",
+    "end": "2026-09-28T06:15:28.464Z",
+    "duration": 5521,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "41beb277-c225-416f-8e6d-5f79546b2d39",
+      "title": "",
+      "fullFile": "cypress\\e2e\\basic\\05_dropdown.cy.js",
+      "file": "cypress\\e2e\\basic\\05_dropdown.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5b7ac3ca-cef4-4cd0-93e8-3410d6bb0362",
+          "title": "Basic 05: Dropdown Select Interactions",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "selects option by visible text and verifies value",
+              "fullTitle": "Basic 05: Dropdown Select Interactions selects option by visible text and verifies value",
+              "timedOut": null,
+              "duration": 3827,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Default selected facility is Tokyo\ncy.get('#combo_facility').should('have.value', 'Tokyo CURA Healthcare Center');\n// Select Hongkong by text\ncy.get('#combo_facility').select('Hongkong CURA Healthcare Center');\ncy.get('#combo_facility').should('have.value', 'Hongkong CURA Healthcare Center');\n// Select Seoul by text\ncy.get('#combo_facility').select('Seoul CURA Healthcare Center');\ncy.get('#combo_facility').should('have.value', 'Seoul CURA Healthcare Center');",
+              "err": {},
+              "uuid": "c33c4e04-585a-4a6d-a882-b9cccbea2a1b",
+              "parentUUID": "5b7ac3ca-cef4-4cd0-93e8-3410d6bb0362",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "selects option by value and verifies currently selected option text",
+              "fullTitle": "Basic 05: Dropdown Select Interactions selects option by value and verifies currently selected option text",
+              "timedOut": null,
+              "duration": 1605,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Select Tokyo option by value\ncy.get('#combo_facility').select('Tokyo CURA Healthcare Center');\n// Assert using selected pseudo-class\ncy.get('#combo_facility option:selected').should('have.text', 'Tokyo CURA Healthcare Center');",
+              "err": {},
+              "uuid": "18a21f2a-6026-48eb-9271-1b55b1d4db83",
+              "parentUUID": "5b7ac3ca-cef4-4cd0-93e8-3410d6bb0362",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c33c4e04-585a-4a6d-a882-b9cccbea2a1b",
+            "18a21f2a-6026-48eb-9271-1b55b1d4db83"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5432,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

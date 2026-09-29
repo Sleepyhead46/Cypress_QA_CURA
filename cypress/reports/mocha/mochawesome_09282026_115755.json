@@ -1,0 +1,144 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:12:46.809Z",
+    "end": "2026-09-28T06:12:55.690Z",
+    "duration": 8881,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "84889f86-f69f-415d-a4c4-801056e777f4",
+      "title": "",
+      "fullFile": "cypress\\e2e\\advanced\\02_network_interception.cy.js",
+      "file": "cypress\\e2e\\advanced\\02_network_interception.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f4798d3c-0aa2-4a08-82dd-b3ffd84f7c20",
+          "title": "Advanced 02: Network Interception & Request Stubbing",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "intercepts real POST authentication, validates payload, and waits on alias",
+              "fullTitle": "Advanced 02: Network Interception & Request Stubbing intercepts real POST authentication, validates payload, and waits on alias",
+              "timedOut": null,
+              "duration": 5052,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Intercept POST request to /authenticate.php\ncy.intercept('POST', '**/authenticate.php').as('authRequest');\ncy.visit('/profile.php#login');\ncy.get('#txt-username').type('John Doe');\ncy.get('#txt-password').type('ThisIsNotAPassword', {\n  log: false\n});\ncy.get('#btn-login').click();\n// Wait for the intercepted request and assert against payload & response\ncy.wait('@authRequest').then(interception => {\n  // Validate request payload\n  expect(interception.request.body).to.include('username=John+Doe');\n  expect(interception.request.body).to.include('password=ThisIsNotAPassword');\n  // Validate HTTP status\n  expect(interception.response.statusCode).to.be.oneOf([200, 302]);\n});\ncy.url().should('include', '#appointment');",
+              "err": {},
+              "uuid": "9eeae4f6-edbf-451f-9831-b0ca61b4e715",
+              "parentUUID": "f4798d3c-0aa2-4a08-82dd-b3ffd84f7c20",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "intercepts appointment booking submission and validates payload",
+              "fullTitle": "Advanced 02: Network Interception & Request Stubbing intercepts appointment booking submission and validates payload",
+              "timedOut": null,
+              "duration": 2902,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.login('John Doe', 'ThisIsNotAPassword');\n// Intercept POST request to appointment handler\ncy.intercept('POST', '**/appointment.php*').as('appointmentSubmission');\ncy.get('#combo_facility').select('Hongkong CURA Healthcare Center');\ncy.get('#chk_hospotal_readmission').check();\ncy.get('#radio_program_medicaid').check();\ncy.get('#txt_visit_date').type('22/10/2026');\ncy.get('h2').click();\ncy.get('#txt_comment').type('Intercept network validation comment');\ncy.get('#btn-book-appointment').click();\n// Verify intercepted submission\ncy.wait('@appointmentSubmission').then(interception => {\n  expect(interception.request.method).to.eq('POST');\n  expect(interception.request.body).to.include('facility=Hongkong+CURA+Healthcare+Center');\n  expect(interception.request.body).to.include('hospital_readmission=Yes');\n  expect(interception.request.body).to.include('programs=Medicaid');\n  expect(interception.response.statusCode).to.be.oneOf([200, 302]);\n});\ncy.url().should('include', '/appointment.php#summary');",
+              "err": {},
+              "uuid": "b4f030ee-f653-4c93-9e63-aeb3bf7e2aed",
+              "parentUUID": "f4798d3c-0aa2-4a08-82dd-b3ffd84f7c20",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "stubs authentication route to simulate HTTP 500 Internal Server Error",
+              "fullTitle": "Advanced 02: Network Interception & Request Stubbing stubs authentication route to simulate HTTP 500 Internal Server Error",
+              "timedOut": null,
+              "duration": 844,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Stub the endpoint with a custom 500 error response\ncy.intercept('POST', '**/authenticate.php', {\n  statusCode: 500,\n  body: 'Internal Server Error - Database Unavailable',\n  headers: {\n    'content-type': 'text/html'\n  }\n}).as('serverErrorStub');\ncy.visit('/profile.php#login');\ncy.get('#txt-username').type('John Doe');\ncy.get('#txt-password').type('ThisIsNotAPassword', {\n  log: false\n});\ncy.get('#btn-login').click();\n// Wait on stub\ncy.wait('@serverErrorStub').its('response.statusCode').should('eq', 500);",
+              "err": {},
+              "uuid": "292c3672-1021-4ca3-b612-2bb26912b2ec",
+              "parentUUID": "f4798d3c-0aa2-4a08-82dd-b3ffd84f7c20",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9eeae4f6-edbf-451f-9831-b0ca61b4e715",
+            "b4f030ee-f653-4c93-9e63-aeb3bf7e2aed",
+            "292c3672-1021-4ca3-b612-2bb26912b2ec"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8798,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

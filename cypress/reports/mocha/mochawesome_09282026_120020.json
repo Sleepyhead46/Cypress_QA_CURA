@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 2,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-09-28T06:14:56.433Z",
+    "end": "2026-09-28T06:15:20.866Z",
+    "duration": 24433,
+    "testsRegistered": 3,
+    "passPercent": 66.66666666666666,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ac335824-e100-40a4-85fc-a22340cd0224",
+      "title": "",
+      "fullFile": "cypress\\e2e\\basic\\04_button_click.cy.js",
+      "file": "cypress\\e2e\\basic\\04_button_click.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "da11b25c-d273-45da-b2ca-1ba802b984be",
+          "title": "Basic 04: Button Click Interactions",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "navigates to login page when clicking Make Appointment CTA",
+              "fullTitle": "Basic 04: Button Click Interactions navigates to login page when clicking Make Appointment CTA",
+              "timedOut": null,
+              "duration": 4090,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\n// Click hero CTA button\ncy.get('#btn-make-appointment').should('be.visible').click();\n// Verify resulting page state\ncy.url().should('include', '/profile.php#login');\ncy.get('h2').should('have.text', 'Login');\ncy.get('#btn-login').should('be.visible');",
+              "err": {},
+              "uuid": "17705449-7493-4f34-8c7e-b54ff0c65f3b",
+              "parentUUID": "da11b25c-d273-45da-b2ca-1ba802b984be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "triggers login and state transition on submit button click",
+              "fullTitle": "Basic 04: Button Click Interactions triggers login and state transition on submit button click",
+              "timedOut": null,
+              "duration": 1647,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/profile.php#login');\ncy.get('#txt-username').type('John Doe');\ncy.get('#txt-password').type('ThisIsNotAPassword');\n// Click submit button\ncy.get('#btn-login').click();\n// Verify resulting page state changed to appointment form\ncy.get('section#appointment').should('be.visible');\ncy.get('#btn-book-appointment').should('be.visible');",
+              "err": {},
+              "uuid": "669fb92a-4af0-4dd4-9a71-9e6d61b28af7",
+              "parentUUID": "da11b25c-d273-45da-b2ca-1ba802b984be",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "toggles sidebar navigation panel on menu button click",
+              "fullTitle": "Basic 04: Button Click Interactions toggles sidebar navigation panel on menu button click",
+              "timedOut": null,
+              "duration": 9262,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\n// Initially sidebar wrapper is not active\ncy.get('#sidebar-wrapper').should('not.have.class', 'active');\n// Click hamburger button\ncy.get('#menu-toggle').click();\n// Verify state updated to active\ncy.get('#sidebar-wrapper').should('have.class', 'active');\n// Click close button\ncy.get('#menu-close').click();\n// Verify state closed\ncy.get('#sidebar-wrapper').should('not.have.class', 'active');",
+              "err": {
+                "message": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<a id=\"menu-close\" href=\"#\" class=\"btn btn-light btn-lg pull-right toggle\">...</a>`\n\nis being covered by another element:\n\n`<i class=\"fa fa-bars\"></i>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying after 8050ms: `cy.click()` failed because this element:\n\n`<a id=\"menu-close\" href=\"#\" class=\"btn btn-light btn-lg pull-right toggle\">...</a>`\n\nis being covered by another element:\n\n`<i class=\"fa fa-bars\"></i>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at ensureIsDescendent (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:113031:68)\n    at ensureDescendents (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:113082:5)\n    at ensureDescendentsAndScroll (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:113088:14)\n    at ensureElIsNotCovered (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:113219:5)\n    at runAllChecks (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:113420:52)\n    at retryActionability (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:113464:16)\n    at tryCatcher (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:4288:29)\n    at whenStable (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:151863:70)\n    at <unknown> (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:151763:14)\n    at tryCatcher (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise._settlePromiseFromHandler (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1492:31)\n    at Promise._settlePromise (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1549:18)\n    at Promise._settlePromise0 (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1594:10)\n    at Promise._settlePromises (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1674:18)\n    at Promise._fulfill (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:1618:18)\n    at <unknown> (https://katalon-demo-cura.herokuapp.com/__cypress/runner/cypress_runner.js:5423:46)",
+                "diff": null
+              },
+              "uuid": "a23e9501-c909-46c6-8d89-7bad657153a4",
+              "parentUUID": "da11b25c-d273-45da-b2ca-1ba802b984be",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "17705449-7493-4f34-8c7e-b54ff0c65f3b",
+            "669fb92a-4af0-4dd4-9a71-9e6d61b28af7"
+          ],
+          "failures": [
+            "a23e9501-c909-46c6-8d89-7bad657153a4"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 14999,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

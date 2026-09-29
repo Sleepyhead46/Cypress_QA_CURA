@@ -1,0 +1,144 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-28T06:16:25.179Z",
+    "end": "2026-09-28T06:16:36.843Z",
+    "duration": 11664,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2e712bdf-7bfa-493b-88ac-c2ac50e14f16",
+      "title": "",
+      "fullFile": "cypress\\e2e\\intermediate\\03_page_objects.cy.js",
+      "file": "cypress\\e2e\\intermediate\\03_page_objects.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "98dcdac0-a717-44da-acb9-d1294c90b2b9",
+          "title": "Intermediate 03: Page Object Model Implementation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "validates login page visual elements and enters valid credentials",
+              "fullTitle": "Intermediate 03: Page Object Model Implementation validates login page visual elements and enters valid credentials",
+              "timedOut": null,
+              "duration": 4353,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_LoginPage.default.heading.should('have.text', 'Login');\n_LoginPage.default.demoAccountBox.should('be.visible');\n_LoginPage.default.login('John Doe', 'ThisIsNotAPassword');\n// Confirm navigation to appointment page\n_AppointmentPage.default.heading.should('have.text', 'Make Appointment');",
+              "err": {},
+              "uuid": "afb9fe86-1158-471c-8857-459dfe61c027",
+              "parentUUID": "98dcdac0-a717-44da-acb9-d1294c90b2b9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "completes appointment booking using Page Objects and verifies summary",
+              "fullTitle": "Intermediate 03: Page Object Model Implementation completes appointment booking using Page Objects and verifies summary",
+              "timedOut": null,
+              "duration": 3879,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_LoginPage.default.login('John Doe', 'ThisIsNotAPassword');\nconst appointmentDetails = {\n  facility: 'Seoul CURA Healthcare Center',\n  hospitalReadmission: true,\n  program: 'None',\n  visitDate: '12/11/2026',\n  comment: 'Cardio stress test referral booked with POM'\n};\n_AppointmentPage.default.bookAppointment(appointmentDetails);\n// Verify via Summary Page Object\n_SummaryPage.default.verifySummary(appointmentDetails);\n// Return to homepage via Summary Page Object\n_SummaryPage.default.goToHomepage();\ncy.url().should('eq', `${Cypress.config('baseUrl')}/`);",
+              "err": {},
+              "uuid": "4162fb11-a603-48ee-b7a2-cd112bac7b2e",
+              "parentUUID": "98dcdac0-a717-44da-acb9-d1294c90b2b9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "performs navigation and logout using Navbar Page Object",
+              "fullTitle": "Intermediate 03: Page Object Model Implementation performs navigation and logout using Navbar Page Object",
+              "timedOut": null,
+              "duration": 3259,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_LoginPage.default.login('John Doe', 'ThisIsNotAPassword');\n// Navigate to History page via Navbar\n_Navbar.default.navigateTo('History');\ncy.url().should('include', '/history.php#history');\n// Logout via Navbar\n_Navbar.default.navigateTo('Logout');\ncy.url().should('eq', `${Cypress.config('baseUrl')}/`);",
+              "err": {},
+              "uuid": "7e4d784c-d244-4292-89cb-8265ddf18025",
+              "parentUUID": "98dcdac0-a717-44da-acb9-d1294c90b2b9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "afb9fe86-1158-471c-8857-459dfe61c027",
+            "4162fb11-a603-48ee-b7a2-cd112bac7b2e",
+            "7e4d784c-d244-4292-89cb-8265ddf18025"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 11491,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mocha",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

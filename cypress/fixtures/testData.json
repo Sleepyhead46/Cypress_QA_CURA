@@ -1,0 +1,38 @@
+{
+  "site": {
+    "title": "CURA Healthcare Service",
+    "mainHeading": "CURA Healthcare Service",
+    "subHeading": "We Care About Your Health",
+    "addressText": "Atlanta 550 Pharr Road NE Suite 525",
+    "phone": "(678) 813-1KMS"
+  },
+  "loginPage": {
+    "heading": "Login",
+    "subtext": "Please login to make appointment.",
+    "invalidLoginMessage": "Login failed! Please ensure the username and password are valid."
+  },
+  "appointmentForm": {
+    "heading": "Make Appointment",
+    "facilities": [
+      "Tokyo CURA Healthcare Center",
+      "Hongkong CURA Healthcare Center",
+      "Seoul CURA Healthcare Center"
+    ],
+    "programs": [
+      "Medicare",
+      "Medicaid",
+      "None"
+    ]
+  },
+  "confirmation": {
+    "heading": "Appointment Confirmation",
+    "leadText": "Please be informed that your appointment has been booked as following:"
+  },
+  "endpoints": {
+    "authenticate": "/authenticate.php",
+    "appointment": "/appointment.php#summary",
+    "history": "/history.php#history",
+    "profile": "/profile.php#profile",
+    "logout": "/authenticate.php?logout"
+  }
+}
