@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Default runner: Runs the full headless suite
+  cypress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cypress_e2e_runner
+    environment:
+      - CI=1
+      - CYPRESS_baseUrl=https://katalon-demo-cura.herokuapp.com
+    volumes:
+      - ./cypress/reports:/e2e/cypress/reports
+      - ./cypress/screenshots:/e2e/cypress/screenshots
+      - ./cypress/videos:/e2e/cypress/videos
+    shm_size: '2gb'
+    command: npm run cy:run:headless
+
+  # Runner for Basic Tier (Level 1 - 7 Specs)
+  cypress-basic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cypress_basic_tier
+    environment:
+      - CI=1
+    volumes:
+      - ./cypress/reports:/e2e/cypress/reports
+      - ./cypress/screenshots:/e2e/cypress/screenshots
+      - ./cypress/videos:/e2e/cypress/videos
+    shm_size: '2gb'
+    command: npm run test:basic
+
+  # Runner for Intermediate Tier (Level 2 - 7 Specs)
+  cypress-intermediate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cypress_intermediate_tier
+    environment:
+      - CI=1
+    volumes:
+      - ./cypress/reports:/e2e/cypress/reports
+      - ./cypress/screenshots:/e2e/cypress/screenshots
+      - ./cypress/videos:/e2e/cypress/videos
+    shm_size: '2gb'
+    command: npm run test:intermediate
+
+  # Runner for Advanced Tier (Level 3 - 9 Specs)
+  cypress-advanced:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cypress_advanced_tier
+    environment:
+      - CI=1
+    volumes:
+      - ./cypress/reports:/e2e/cypress/reports
+      - ./cypress/screenshots:/e2e/cypress/screenshots
+      - ./cypress/videos:/e2e/cypress/videos
+    shm_size: '2gb'
+    command: npm run test:advanced

@@ -1,0 +1,89 @@
+name: Cypress E2E Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      test_tier:
+        description: 'Select test tier to execute'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - basic
+          - intermediate
+          - advanced
+          - smoke
+
+jobs:
+  cypress-e2e:
+    runs-on: ubuntu-latest
+    name: Cypress Test Execution
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        run: npm ci || npm install
+
+      - name: Verify Cypress Binary
+        run: npx cypress verify
+
+      # Tiered Execution
+      - name: Run Basic Tests (7 Specs)
+        if: "${{ github.event.inputs.test_tier == 'basic' || github.event.inputs.test_tier == 'all' || github.event_name != 'workflow_dispatch' }}"
+        run: npm run test:basic
+
+      - name: Run Intermediate Tests (7 Specs)
+        if: "${{ github.event.inputs.test_tier == 'intermediate' || github.event.inputs.test_tier == 'all' || github.event_name != 'workflow_dispatch' }}"
+        run: npm run test:intermediate
+
+      - name: Run Advanced Tests (9 Specs)
+        if: "${{ github.event.inputs.test_tier == 'advanced' || github.event.inputs.test_tier == 'all' || github.event_name != 'workflow_dispatch' }}"
+        run: npm run test:advanced
+
+      - name: Run Smoke Tests
+        if: "${{ github.event.inputs.test_tier == 'smoke' }}"
+        run: npm run test:smoke
+
+      # Report Generation & Upload
+      - name: Generate Mochawesome Reports
+        if: always()
+        run: |
+          npm run report:merge || true
+          npm run report:generate || true
+
+      - name: Upload Mochawesome HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-html-report
+          path: cypress/reports/html
+          retention-days: 14
+
+      - name: Upload Test Failure Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          retention-days: 7
+
+      - name: Upload Execution Videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          retention-days: 7
