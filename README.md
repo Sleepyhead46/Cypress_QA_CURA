@@ -5,18 +5,69 @@
 
 Hey there! 👋 This is a Cypress automation framework built around the [CURA Healthcare demo site](https://katalon-demo-cura.herokuapp.com) — a free, publicly accessible app that's perfect for learning end-to-end testing. The project goes from the very basics all the way up to CI/CD pipelines, Docker, and accessibility testing.
 
-**Demo site:** https://katalon-demo-cura.herokuapp.com
+**Demo site:** https://katalon-demo-cura.herokuapp.com  
 **Login:** Username: `John Doe` / Password: `ThisIsNotAPassword`
+
+> 📖 **Comprehensive Technical Reference:** Looking for in-depth method signatures, POM design, custom command implementations, lifecycle hooks, and complete configuration breakdowns? See **[detaile.md](detaile.md)**.
 
 ---
 
 ## What's in this project?
 
-Tests are split into three levels so you can follow the path or jump straight to what you need:
+Tests are split into three progressive levels (23 spec files in total) so you can follow the structured path or jump straight to what you need:
 
-- **Basic** — getting started (visiting pages, clicking, typing)
-- **Intermediate** — fixtures, custom commands, Page Object Model, data-driven tests
-- **Advanced** — API testing, network interception, sessions, accessibility, performance
+- **Basic (7 specs)** — getting started (visiting pages, clicking, typing, forms, assertions, navigation, history, logout)
+- **Intermediate (7 specs)** — fixtures, custom commands, Page Object Model, data-driven tests, hooks, uploads
+- **Advanced (9 specs)** — API testing, network interception, sessions, accessibility, performance, flake handling
+
+### Complete Test Catalog (23 Specs)
+
+<details>
+<summary><b>Level 1 — Basic Specs (7 files)</b></summary>
+
+| Spec File | Focus Area | What it tests |
+|---|---|---|
+| `01_visit_and_headings.cy.js` | Core DOM | Home page load, header elements, viewport responsiveness |
+| `02_login_happy_path.cy.js` | Authentication | Valid login flow, credential submission, `#appointment` redirect |
+| `03_login_failure.cy.js` | Validation | Invalid credentials, login error alerts, required field checks |
+| `04_book_appointment.cy.js` | Forms | Full appointment booking, radio/dropdown/calendar selection |
+| `05_navigation_menu.cy.js` | Navigation | Sidebar hamburger menu toggle, navigation links, overlay |
+| `06_appointment_history.cy.js` | State & History | Verifying booked appointment records and empty history state |
+| `07_logout.cy.js` | Session End | Menu logout link, session termination, redirect back to home |
+
+</details>
+
+<details>
+<summary><b>Level 2 — Intermediate Specs (7 files)</b></summary>
+
+| Spec File | Focus Area | What it tests |
+|---|---|---|
+| `01_fixtures_login.cy.js` | Test Data | Data-driven authentication using `cypress/fixtures/users.json` |
+| `02_custom_commands.cy.js` | Reusability | Exercising reusable commands (`cy.login`, `cy.bookAppointment`, etc.) |
+| `03_page_objects.cy.js` | POM Pattern | Clean abstractions using LoginPage, AppointmentPage, SummaryPage |
+| `04_data_driven_booking.cy.js` | Data-Driven | Looping through `appointments.json` to verify multiple scenarios |
+| `05_hooks_and_context.cy.js` | Test Lifecycle | Suite structure with `before`, `beforeEach`, `afterEach` hooks |
+| `06_multiple_assertions.cy.js` | Assertions | Chained assertions, table records, CSS properties, multiple checks |
+| `07_file_upload_or_download.cy.js` | File Handling | Document handling and file upload workflows via `.selectFile()` |
+
+</details>
+
+<details>
+<summary><b>Level 3 — Advanced Specs (9 files)</b></summary>
+
+| Spec File | Focus Area | What it tests |
+|---|---|---|
+| `01_api_testing.cy.js` | API Testing | Direct HTTP calls with `cy.request()` (GET/POST, status codes, headers) |
+| `02_network_intercept.cy.js` | Interception | Stubbing and spying network traffic using `cy.intercept()` |
+| `03_session_login.cy.js` | Performance | Lightning-fast authentication caching using `cy.session()` |
+| `04_dynamic_elements.cy.js` | Dynamic DOM | Asynchronous loading, conditional elements, dynamic wait patterns |
+| `05_visual_or_viewport.cy.js` | Multi-Device | Layout validation across mobile, tablet, and desktop viewports |
+| `06_negative_scenarios.cy.js` | Edge Cases | SQL injection strings, boundary values, malformed inputs |
+| `07_accessibility.cy.js` | A11y Audit | WCAG 2.1 Level A/AA compliance auditing with `cypress-axe` |
+| `08_performance_timing.cy.js` | Performance | Page load SLAs and browser performance API metrics |
+| `09_flaky_test_handling.cy.js` | Reliability | Retry strategies, retry loops, resilient locator patterns |
+
+</details>
 
 The CURA app has everything you'd want to practice on:
 
@@ -69,11 +120,12 @@ cypress_1/
 │   ├── videos/
 │   └── reports/
 │
-├── cypress.config.js
-├── package.json
-├── Dockerfile
-├── docker-compose.yml
-└── .github/workflows/cypress.yml
+├── cypress.config.js        # Global test configuration
+├── detaile.md               # Complete 1,100+ line technical architecture & spec reference
+├── package.json             # Dependencies and test runner scripts
+├── Dockerfile               # Containerized test runner
+├── docker-compose.yml       # Multi-container reporting setup
+└── .github/workflows/cypress.yml  # GitHub Actions CI workflow
 ```
 
 ---
@@ -94,28 +146,46 @@ npm install
 
 **Open the interactive GUI** (great for development and debugging):
 ```bash
+npm run cy:open
+# or
 npx cypress open
 ```
 
 **Run everything headlessly** (great for CI):
 ```bash
+npm run cy:run
+# or
 npx cypress run
 ```
 
 **Run just one level:**
 ```bash
-npx cypress run --spec "cypress/e2e/basic/**/*.cy.js"
-npx cypress run --spec "cypress/e2e/intermediate/**/*.cy.js"
-npx cypress run --spec "cypress/e2e/advanced/**/*.cy.js"
+npm run test:basic
+npm run test:intermediate
+npm run test:advanced
 ```
 
-**Using the npm scripts:**
+**Full NPM Scripts Reference:**
+
 ```bash
-npm run test:smoke       # Fast critical-path check
-npm run test:regression  # Full suite
-npm run test:api         # API tests only
-npm run test:ui          # Basic + intermediate UI tests
-npm run test:full        # Run everything + generate HTML report
+# Tier & Suite Execution
+npm run test:smoke         # Fast critical-path smoke check
+npm run test:regression    # Full test suite (all 23 specs)
+npm run test:basic         # Run all 7 Basic specs
+npm run test:intermediate  # Run all 7 Intermediate specs
+npm run test:advanced      # Run all 9 Advanced specs
+npm run test:ui            # All UI specs (Basic + Intermediate)
+npm run test:api           # API tests only
+
+# Browser Runners
+npm run cy:run:chrome      # Headless run in Google Chrome
+npm run cy:run:edge        # Headless run in Microsoft Edge
+npm run cy:run:headless    # Explicit headless flag
+
+# Complete Pipeline & Reporting
+npm run test:full          # Clean reports -> Run all specs -> Generate HTML report
+npm run clean:reports      # Delete previous reports, screenshots, and videos
+npm run report             # Merge Mochawesome JSONs and generate HTML report
 ```
 
 ---
@@ -395,4 +465,3 @@ ISC
 ---
 
 *Built with Cypress 16 on the CURA Healthcare demo. All selectors verified against the live app — no made-up elements.*
-# Cypress_QA_CURA
